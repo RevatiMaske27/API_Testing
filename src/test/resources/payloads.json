@@ -1,0 +1,14 @@
+{
+  "/api/login": {
+    "email": "eve.holt@reqres.in",
+    "password": "cityslicka"
+  },
+  "/api/register": {
+    "email": "eve.holt@reqres.in",
+    "password": "pistol"
+  },
+  "/api/users": {
+    "name": "morpheus",
+    "job": "leader"
+  }
+}
