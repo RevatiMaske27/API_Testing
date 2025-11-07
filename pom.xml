@@ -92,10 +92,11 @@
   <configuration>
     <testFailureIgnore>true</testFailureIgnore>
   </configuration>
-</plugin>        <plugin>
+</plugin>      
+  <plugin>
     <groupId>net.masterthought</groupId>
     <artifactId>cucumber-reporting</artifactId>
-    <version>5.7.0</version>
+    <version>5.10.0</version>
     <executions>
         <execution>
             <id>generate-cucumber-html-report</id>
