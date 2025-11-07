@@ -1,3 +1,4 @@
+//This class sets up and tears down the REST Assured environment for Cucumber tests.
 package hooks;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
