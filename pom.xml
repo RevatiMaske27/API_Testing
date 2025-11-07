@@ -104,7 +104,7 @@
                 <goal>generate</goal>
             </goals>
             <configuration>
-                <projectName>API Test Automation</projectName>
+                <projectName>AutomateAPIReqres</projectName>
                 <outputDirectory>${project.build.directory}/cucumber-html-report</outputDirectory>
                 <cucumberOutput>${project.build.directory}/cucumber.json</cucumberOutput>
             </configuration>
