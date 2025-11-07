@@ -161,7 +161,6 @@ public class ReqResStepDefinitions {
 
 	@Given("user with ID {int} exists and updated name and job are provided")
 	public void user_with_id_exists_and_updated_name_and_job_are_provided(Integer id) {
-		// This step can be used to set up any preconditions if needed
 		// For this example, we assume the user with the given ID exists and updated
 		// name and job are provided
 	}
