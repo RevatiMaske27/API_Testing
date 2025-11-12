@@ -33,6 +33,7 @@ jobs:
       - name: Run tests with Maven
         run: mvn clean test
 
+
       - name: Generate Cucumber HTML Report
         run: mvn verify
 
