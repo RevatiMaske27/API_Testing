@@ -1,4 +1,3 @@
-
 name: API Test Automation
 
 on:
@@ -33,9 +32,11 @@ jobs:
       - name: Run tests with Maven
         run: mvn clean test
 
-
       - name: Generate Cucumber HTML Report
         run: mvn verify
+
+      - name: Debug target directory
+        run: ls -R target
 
       - name: Upload test results
         if: always()
