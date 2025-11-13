@@ -12,18 +12,22 @@ import com.google.gson.JsonParser;
 
 import utility.ConfigLoader;
 import utility.JsonReader;
+import io.restassured.specification.RequestSpecification;
 
 public class ReqResStepDefinitions {
 
 	private Response response;
 	private String authKey;
 	private String payload; // Declare payload as a class-level variable
+    private RequestSpecification requestSpec; // Declare a reusable RequestSpecification
+
 
 	@Given("the ReqRes API is available")
 	public void the_api_is_available() {
 		RestAssured.baseURI = ConfigLoader.getProperty("baseURL");
 		authKey = ConfigLoader.getProperty("x-api-key"); // Load the authorization key from config
-
+		// Initialize the RequestSpecification with the common header
+        requestSpec = RestAssured.given().header("x-api-key", authKey);
 	}
 
 	@Given("a registered user with valid email and password")
@@ -35,10 +39,10 @@ public class ReqResStepDefinitions {
 	@When("a POST request is sent to {string}")
 	public void send_post_request(String endpoint) {
 		String payload = JsonReader.getPayload(endpoint);
-		response = RestAssured.given().contentType(ContentType.JSON).header("x-api-key", "reqres-free-v1") // Add
-																											// x-api-key
-																											// header
-				.body(payload).post(endpoint);
+		//response = RestAssured.given().contentType(ContentType.JSON).header("x-api-key", "reqres-free-v1").body(payload).post(endpoint); // Add x-api-key header
+        response = requestSpec.contentType(ContentType.JSON).body(payload).post(endpoint);
+																								
+				
 	}
 
 	@Then("the response status should be {int}")
