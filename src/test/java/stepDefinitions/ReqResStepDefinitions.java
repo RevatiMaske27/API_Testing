@@ -67,8 +67,8 @@ public class ReqResStepDefinitions {
 		JsonObject jsonObject = new JsonParser().parse(payloadTemplate).getAsJsonObject();
 		jsonObject.remove("password"); // Remove the password field
 		payload = jsonObject.toString(); // Convert back to JSON string
-		response = RestAssured.given().contentType(ContentType.JSON).header("x-api-key", authKey).body(payload)
-				.post(endpoint);
+		//response = RestAssured.given().contentType(ContentType.JSON).header("x-api-key", authKey).body(payload).post(endpoint);
+		response = requestSpec.contentType(ContentType.JSON).body(payload).post(endpoint);
 
 	}
 	//And an error message should be returned write a step definition for this
@@ -96,14 +96,14 @@ public class ReqResStepDefinitions {
 		JsonObject jsonObject = new JsonParser().parse(payloadTemplate).getAsJsonObject();
 		jsonObject.remove("password"); // Remove the password field
 		payload = jsonObject.toString(); // Convert back to JSON string
-		response = RestAssured.given().contentType(ContentType.JSON).header("x-api-key", authKey).body(payload)
-				.post(endpoint);
+		//response = RestAssured.given().contentType(ContentType.JSON).header("x-api-key", authKey).body(payload).post(endpoint);
+	    response = requestSpec.contentType(ContentType.JSON).body(payload).post(endpoint);
 	}
 
 	@When("a GET request is sent to {string}")
 	public void send_get_request(String endpoint) {
-		response = RestAssured.given().header("x-api-key", "reqres-free-v1") // Add x-api-key header
-				.get(endpoint);
+		//response = RestAssured.given().header("x-api-key", "reqres-free-v1").get(endpoint); // Add x-api-key header
+		response = requestSpec.get(endpoint);
 	}
 
 	@Then("a list of users should be returned")
@@ -114,8 +114,8 @@ public class ReqResStepDefinitions {
 	// When a GET request is sent to "/api/users?page=999" invalid page
 	@When("a GET request is sent to {string} invalid page")
 	public void send_get_request_invalid_page(String endpoint) {
-		response = RestAssured.given().header("x-api-key", "reqres-free-v1") // Add x-api-key header
-				.get(endpoint);
+		//response = RestAssured.given().header("x-api-key", "reqres-free-v1").get(endpoint); // Add x-api-key header
+		response = requestSpec.get(endpoint);		
 	}
 
 	@Then("an empty list or error should be returned")
@@ -137,8 +137,8 @@ public class ReqResStepDefinitions {
 	// When a GET request is sent to "/api/users/999" invalid id
 	@When("a GET request is sent to {string} invalid id")
 	public void send_get_request_invalid_id(String endpoint) {
-		response = RestAssured.given().header("x-api-key", "reqres-free-v1") // Add x-api-key header
-				.get(endpoint);
+		//response = RestAssured.given().header("x-api-key", "reqres-free-v1").get(endpoint); // Add x-api-key header
+		response = requestSpec.get(endpoint);		
 	}
 
 	@Given("name and job are provided")
@@ -167,16 +167,14 @@ public class ReqResStepDefinitions {
 	@Given("user with ID {int} exists and updated name and job are provided")
 	public void user_with_id_exists_and_updated_name_and_job_are_provided(Integer id) {
 		// For this example, we assume the user with the given ID exists and updated
-		// name and job are provided
 	}
 
 	@When("a PUT request is sent to {string} with name and job")
 	public void send_put_request(String endpoint) {
 		String payload = JsonReader.getPayload(endpoint);
-		response = RestAssured.given().contentType(ContentType.JSON).header("x-api-key", "reqres-free-v1") // Add
-																											// x-api-key
-																											// header
-				.body(payload).put(endpoint);
+		//response = RestAssured.given().contentType(ContentType.JSON).header("x-api-key", "reqres-free-v1").body(payload).put(endpoint); // Add x-api-key header
+		response = requestSpec.contentType(ContentType.JSON).body(payload).put(endpoint);																									
+				
 	}
 
 	@Then("updated data should be returned with name {string}")
@@ -188,10 +186,9 @@ public class ReqResStepDefinitions {
 	@When("a PUT request is sent to {string}")
 	public void send_put_request_to_update(String endpoint) {
 		String payload = JsonReader.getPayload(endpoint);
-		response = RestAssured.given().contentType(ContentType.JSON).header("x-api-key", "reqres-free-v1") // Add
-																											// x-api-key
-																											// header
-				.body(payload).put(endpoint);
+		//response = RestAssured.given().contentType(ContentType.JSON).header("x-api-key", "reqres-free-v1").body(payload).put(endpoint); // Add x-api-key header
+		response = requestSpec.contentType(ContentType.JSON).body(payload).put(endpoint);																									
+				
 	}
 
 	@Then("the response status should be {int} or error")
@@ -209,8 +206,8 @@ public class ReqResStepDefinitions {
 
 	@When("a DELETE request is sent to {string}")
 	public void send_delete_request(String endpoint) {
-		response = RestAssured.given().header("x-api-key", "reqres-free-v1") // Add x-api-key header
-				.delete(endpoint);
+		//response = RestAssured.given().header("x-api-key", "reqres-free-v1").delete(endpoint); // Add x-api-key header
+		response = requestSpec.delete(endpoint);		
 	}
 
 	@Then("no content should be returned")
@@ -220,8 +217,8 @@ public class ReqResStepDefinitions {
 
 	@When("a DELETE request is sent to {string} invalid id")
 	public void send_delete_request_invalid_id(String endpoint) {
-		response = RestAssured.given().header("x-api-key", "reqres-free-v1") // Add x-api-key header
-				.delete(endpoint);
+		response = RestAssured.given().header("x-api-key", "reqres-free-v1").delete(endpoint); // Add x-api-key header
+		response = requestSpec.delete(endpoint);		
 	}
 
 	@Then("the response status should be {int} or no content")
@@ -238,8 +235,8 @@ public class ReqResStepDefinitions {
 	@When("a PATCH request is sent to {string} with partial data")
 	public void send_patch_request(String endpoint) {
 		String payload = JsonReader.getPayload(endpoint);
-		response = RestAssured.given().header("x-api-key", "reqres-free-v1") // Add x-api-key header
-				.contentType(ContentType.JSON).body(payload).patch(endpoint);
+		//response = RestAssured.given().header("x-api-key", "reqres-free-v1").contentType(ContentType.JSON).body(payload).patch(endpoint); // Add x-api-key header
+		response = requestSpec.contentType(ContentType.JSON).body(payload).patch(endpoint);		
 	}
 
 	@Then("the response should contain the updated data")
