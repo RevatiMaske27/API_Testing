@@ -244,4 +244,5 @@ public class ReqResStepDefinitions {
 	public void the_response_should_contain_the_updated_data() {
 		response.then().body("job", equalTo("zion resident"));
 	}
+	
 }
