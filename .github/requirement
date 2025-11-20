@@ -1,0 +1,14 @@
+Scenario: Verify the complete user lifecycle flow
+  Given the API is available
+  And there are admin authentication credentials
+  When a POST request is sent to "/users" with valid new user data (Create User)
+  Then the response status code should be 201 and the new user ID is saved
+  When a GET request is sent to "/users/{new_user_id}" (Get User)
+  Then the response status code should be 200 and the details should match the creation input
+  When a PUT request is sent to "/users/{new_user_id}" to update the email address (Update User)
+  Then the response status code should be 200
+  When a GET request is sent to "/users/{new_user_id}" again
+  Then the response status code should be 200 and the email address should be the updated value
+  When a DELETE request is sent to "/users/{new_user_id}" (Delete User)
+  Then the response status code should be 204
+  When a final GET request is sent to "/users/{new_user_id}"Then the response status code should be 404
